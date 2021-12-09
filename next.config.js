@@ -5,6 +5,5 @@ module.exports = {
       topLevelAwait: true
     };
     return config;
-  },
-  basePath: '/'
+  }
 };

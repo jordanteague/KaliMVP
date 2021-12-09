@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }) {
   const [chainId, setChainId] = useState(null);
   const [address, setAddress] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [reload, setReload] = useState(0);
 
   useEffect(() => {
 
@@ -70,6 +71,10 @@ function MyApp({ Component, pageProps }) {
     }
   }
 
+  const changeChain = async () => {
+    window.location.reload();
+  };
+
   return (
     <ChakraProvider theme={theme}>
       <AppContext.Provider
@@ -80,14 +85,16 @@ function MyApp({ Component, pageProps }) {
             chainId: chainId,
             loading: loading,
             address: address,
-            abi: abi
+            abi: abi,
+            reload: reload
           },
           setWeb3: setWeb3,
           setAccount: setAccount,
           setChainId: setChainId,
           setLoading: setLoading,
           setAddress: setAddress,
-          connect: connect
+          connect: connect,
+          setReload: setReload
         }}
       >
         <Component {...pageProps} />

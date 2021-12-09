@@ -45,9 +45,11 @@ export default function ProposalRow(props) {
 
   return(
     <>
+      {loading==true ? null :
       <Modal isOpen={isOpen} onClose={onClose}>
         <ProposalModal p={p} />
       </Modal>
+      }
       <Box border="1px solid" rounded="xl" borderColor="black" padding="25px" margin="5px">
         <VStack>
 

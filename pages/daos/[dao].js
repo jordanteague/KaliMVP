@@ -16,7 +16,7 @@ import { fetchAll } from '../../utils/getterFunctions';
 
 export default function Dao() {
   const value = useContext(AppContext);
-  const { web3, loading, abi } = value.state;
+  const { web3, loading, abi, reload } = value.state;
   const [visible, setVisible] = useState(1);
   const [dao, setDao] = useState({});
   const [holdersArray, setHoldersArray] = useState([]);
@@ -36,6 +36,11 @@ export default function Dao() {
   useEffect(() => {
     fetchData();
   }, [address]);
+
+  useEffect(() => {
+    fetchData();
+    setVisible(1);
+  }, [reload]);
 
   async function fetchData() {
     if(!address) {

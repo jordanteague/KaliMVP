@@ -4,7 +4,7 @@ import {
   Input,
   Button
 } from "@chakra-ui/react";
-import Router, { useRouter } from "next/router";
+import { routeAfterSubmission } from '../../utils/router';
 
 export default function ProcessModule(props) {
   const value = useContext(AppContext);
@@ -34,7 +34,8 @@ export default function ProcessModule(props) {
           .processProposal(id)
           .send({ from: account });
 
-        Router.reload(window.location.pathname);
+          value.setReload(value.state.reload+1);
+          routeAfterSubmission(address);
       } catch (e) {
         alert(e);
         value.setLoading(false);

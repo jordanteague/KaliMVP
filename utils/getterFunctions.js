@@ -117,6 +117,8 @@ export function getPassing(voteType, yesVotes, noVotes, totalSupply, quorum, sup
   if(voteType==0) { // simple majority
     if(yesVotes > noVotes) {
       passing = true;
+    } else {
+      passing = false;
     }
   }
 
@@ -124,9 +126,11 @@ export function getPassing(voteType, yesVotes, noVotes, totalSupply, quorum, sup
     let minYes = ((yesVotes + noVotes) * supermajority) / 100;
     if(yesVotes > minYes) {
       passing = true;
+    } else {
+      passing = false;
     }
   }
-  // second, rule out any failed quorums
+  // second, if quorum fails, mark as failed/failing
   if(voteType==1 || voteType==3) {
     let minVotes = (totalSupply * quorum) / 100;
     let votes = yesVotes + noVotes;
@@ -140,7 +144,7 @@ export function getPassing(voteType, yesVotes, noVotes, totalSupply, quorum, sup
     passingText = "passed";
   } else if(passing==false && open==true) {
     passingText = "failing";
-  } else {
+  } else if(passing==false && open==false){
     passingText = "failed";
   }
 

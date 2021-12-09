@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import Router, { useRouter } from "next/router";
+import { routeAfterSubmission } from '../../utils/router';
 import AppContext from '../../context/AppContext';
 import {
   Input,
@@ -62,8 +62,8 @@ export default function NewProposal() {
         let result = await instance.methods
           .propose(proposalType, description, [account], [amount], [payload])
           .send({ from: account });
-
-          Router.reload(window.location.pathname);
+          value.setReload(value.state.reload+1);
+          routeAfterSubmission(address);
       } catch (e) {
         alert(e);
       }

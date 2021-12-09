@@ -11,6 +11,7 @@ import {
   BsHandThumbsUpFill,
   BsHandThumbsDownFill,
 } from "react-icons/bs";
+import { routeAfterSubmission } from '../../utils/router';
 
 export default function VotingModule(props) {
   const value = useContext(AppContext);
@@ -41,10 +42,8 @@ export default function VotingModule(props) {
             .vote(id, parseInt(approval))
             .send({ from: account });
 
-          Router.push({
-            pathname: "/[dao]",
-            query: { dao: address },
-          });
+            value.setReload(value.state.reload+1);
+            routeAfterSubmission(address);
 
         } catch (e) {}
         value.setLoading(false);
